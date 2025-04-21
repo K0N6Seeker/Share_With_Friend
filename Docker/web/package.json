@@ -1,0 +1,19 @@
+{
+    "name": "redis-node-search-web",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "ejs": "^3.1.10",
+        "express": "^4.21.2",
+        "redis": "^4.7.0",
+        "uuid": "^9.0.1"
+    },
+    "description": "",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs"
+}
