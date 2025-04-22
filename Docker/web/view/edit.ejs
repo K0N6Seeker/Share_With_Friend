@@ -4,112 +4,248 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>แก้ไขข่าว</title>
+    <!-- Early script to apply dark mode before CSS loads to prevent flicker -->
+    <script>
+        (function() {
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f8f9fa;
-            color: #212529;
-            padding-top: 2rem;
-            transition: background-color 0.3s ease, color 0.3s ease;
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --card-bg: #ffffff;
+            --card-border: #dee2e6;
+            --input-bg: #ffffff;
+            --input-text: #212529;
+            --input-border: #ced4da;
+            --input-placeholder: #6c757d;
+            --btn-success-bg: #28a745;
+            --btn-success-border: #28a745;
+            --btn-secondary-bg: #6c757d;
+            --btn-secondary-border: #6c757d;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
+
         .dark-mode {
-            background-color: #212529;
-            color: #f8f9fa;
+            --bg-color: #0d1117; /* GitHub dark background */
+            --text-color: #c9d1d9; /* GitHub primary text */
+            --card-bg: #161b22; /* GitHub card/input background */
+            --card-border: #30363d; /* GitHub border */
+            --input-bg: #161b22;
+            --input-text: #c9d1d9;
+            --input-border: #30363d;
+            --input-placeholder: #8b949e; /* GitHub secondary text */
+            --btn-success-bg: #2ea043; /* GitHub green accent */
+            --btn-success-border: #2ea043;
+            --btn-secondary-bg: #21262d; /* GitHub secondary button */
+            --btn-secondary-border: #30363d;
+            --shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
         }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            padding-top: 3rem;
+            transition: var(--transition);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px; /* Narrower container for modern look */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            transition: var(--transition);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode h1 {
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+        }
+
         .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 0.75rem;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            background-color: #fff;
-            color: #212529;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            box-shadow: var(--shadow);
+            transition: var(--transition), box-shadow 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
         }
-        .dark-mode .card {
-            background-color: #343a40;
-            color: #f8f9fa;
-            box-shadow: 0 2px 6px rgba(255, 255, 255, 0.05);
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
+
+        .dark-mode .card:hover {
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+        }
+
         .form-label {
-            color: #212529;
-            transition: color 0.3s ease;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
         }
-        .dark-mode .form-label {
-            color: #f8f9fa;
-        }
+
         .form-control {
-            background-color: #fff;
-            color: #212529;
-            border: 1px solid #ced4da;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            background-color: var(--input-bg);
+            color: var(--input-text);
+            border: 1px solid var(--input-border);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            transition: var(--transition);
         }
-        .dark-mode .form-control {
-            background-color: #495057;
-            color: #e9ecef;
-            border-color: #6c757d;
-        }
+
         .form-control::placeholder {
-            color: #6c757d;
+            color: var(--input-placeholder);
+            opacity: 0.7;
         }
-        .dark-mode .form-control::placeholder {
-            color: #e9ecef;
+
+        .form-control:focus {
+            background-color: var(--input-bg);
+            color: var(--input-text);
+            border-color: var(--btn-success-bg);
+            box-shadow: 0 0 0 0.25rem rgba(46, 160, 67, 0.3); /* Green focus ring */
+            outline: none;
         }
+
         .btn-success {
-            background-color: #28a745;
-            border-color: #28a745;
-            color: #fff;
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            background: linear-gradient(135deg, var(--btn-success-bg), #218838);
+            border: none;
+            color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: var(--transition), transform 0.2s ease;
         }
-        .dark-mode .btn-success {
-            background-color: #1e7e34;
-            border-color: #1e7e34;
-            color: #fff;
-        }
+
         .btn-success:hover {
-            background-color: #1e7e34;
-            border-color: #1e7e34;
+            background: linear-gradient(135deg, #218838, #1e7e34);
+            transform: translateY(-2px);
         }
+
+        .dark-mode .btn-success {
+            background: linear-gradient(135deg, var(--btn-success-bg), #238636);
+        }
+
+        .dark-mode .btn-success:hover {
+            background: linear-gradient(135deg, #238636, #1e7e34);
+            transform: translateY(-2px);
+        }
+
         .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
-            color: #fff;
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            background: linear-gradient(135deg, var(--btn-secondary-bg), #5a6268);
+            border: none;
+            color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: var(--transition), transform 0.2s ease;
         }
-        .dark-mode .btn-secondary {
-            background-color: #495057;
-            border-color: #495057;
-            color: #fff;
-        }
+
         .btn-secondary:hover {
-            background-color: #5a6268;
-            border-color: #5a6268;
+            background: linear-gradient(135deg, #5a6268, #4b5157);
+            transform: translateY(-2px);
         }
+
+        .dark-mode .btn-secondary {
+            background: linear-gradient(135deg, var(--btn-secondary-bg), #30363d);
+        }
+
         .dark-mode .btn-secondary:hover {
-            background-color: #343a40;
-            border-color: #343a40;
+            background: linear-gradient(135deg, #30363d, #21262d);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-secondary {
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            color: var(--text-color);
+            border-color: var(--btn-secondary-border);
+            background-color: transparent;
+            transition: var(--transition), transform 0.2s ease;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: var(--btn-secondary-bg);
+            color: var(--text-color);
+            transform: translateY(-2px);
+        }
+
+        /* Dark mode toggle button */
+        #darkModeToggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            padding: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            transition: var(--transition), transform 0.2s ease;
+        }
+
+        #darkModeToggle:hover {
+            transform: scale(1.1);
+            background-color: var(--btn-secondary-bg);
+        }
+
+        #darkModeToggle i {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        /* Form validation */
+        .form-control:invalid {
+            border-color: #f85149; /* GitHub red for consistency */
+        }
+
+        .dark-mode .form-control:invalid {
+            border-color: #f85149;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="d-flex justify-content-end mb-3">
-            <button id="darkModeToggle" class="btn btn-sm btn-outline-secondary">
-                <i id="darkModeIcon" class="bi bi-moon-stars-fill"></i> โหมดมืด
+        <div class="d-flex justify-content-end mb-4">
+            <button id="darkModeToggle" class="btn btn-sm btn-outline-secondary" aria-label="สลับโหมดมืด">
+                <i id="darkModeIcon" class="bi bi-moon-stars-fill"></i>
             </button>
         </div>
-        <h1 class="mb-4 text-center">แก้ไขข่าว</h1>
-        <div class="card">
+        <h1 class="mb-5 text-center">แก้ไขข่าว</h1>
+        <div class="card mb-5">
             <div class="card-body">
                 <form action="/edit/<%= id %>" method="POST">
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="title" class="form-label">หัวข้อ</label>
                         <input type="text" name="title" class="form-control" id="title" value="<%= note.title %>" required />
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="content" class="form-label">รายละเอียด</label>
-                        <textarea name="content" class="form-control" id="content" rows="3" required><%= note.content %></textarea>
+                        <textarea name="content" class="form-control" id="content" rows="5" required><%= note.content %></textarea>
                     </div>
-                    <button class="btn btn-success" type="submit">บันทึกการเปลี่ยนแปลง</button>
-                    <a href="/" class="btn btn-secondary ms-2">ยกเลิก</a>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-success" type="submit"><i class="bi bi-check-circle me-2"></i>บันทึกการเปลี่ยนแปลง</button>
+                        <a href="/" class="btn btn-secondary">ยกเลิก</a>
+                    </div>
                 </form>
             </div>
         </div>
@@ -117,32 +253,28 @@
 
     <script>
         const darkModeToggle = document.getElementById('darkModeToggle');
-        const darkModeIcon = document.getElementById('darkModeIcon');
-        const body = document.body;
 
         function enableDarkMode() {
-            body.classList.add('dark-mode');
+            document.documentElement.classList.add('dark-mode');
             localStorage.setItem('darkMode', 'enabled');
-            darkModeIcon.classList.remove('bi-moon-stars-fill');
-            darkModeIcon.classList.add('bi-sun-fill');
-            darkModeToggle.textContent = ' โหมดสว่าง';
+            darkModeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
         }
 
         function disableDarkMode() {
-            body.classList.remove('dark-mode');
+            document.documentElement.classList.remove('dark-mode');
             localStorage.setItem('darkMode', 'disabled');
-            darkModeIcon.classList.remove('bi-sun-fill');
-            darkModeIcon.classList.add('bi-moon-stars-fill');
-            darkModeToggle.textContent = ' โหมดมืด';
+            darkModeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
         }
 
-        // Check if dark mode was previously enabled
+        // Initialize based on saved mode
         if (localStorage.getItem('darkMode') === 'enabled') {
             enableDarkMode();
+        } else {
+            disableDarkMode();
         }
 
         darkModeToggle.addEventListener('click', () => {
-            if (body.classList.contains('dark-mode')) {
+            if (document.documentElement.classList.contains('dark-mode')) {
                 disableDarkMode();
             } else {
                 enableDarkMode();

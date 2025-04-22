@@ -3,6 +3,7 @@ const { v4: uuid } = require('uuid');
 // GET: หน้าแรกพร้อมแสดง note ทั้งหมด และรองรับการค้นหา
 exports.getAllNotes = async (req, res) => {
   const q = (req.query.q || '').toLowerCase();
+  if (q) console.log(`🔍 Search query: "${q}"`);
   const redis = req.redis;
 
   try {
