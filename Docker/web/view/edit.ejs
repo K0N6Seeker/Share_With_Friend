@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>แก้ไขข่าว</title>
+    <title>CurrentEdge - แก้ไขข่าว</title>
     <!-- Early script to apply dark mode before CSS loads to prevent flicker -->
     <script>
         (function() {
@@ -15,6 +15,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
+
         :root {
             --bg-color: #f8f9fa;
             --text-color: #212529;
@@ -24,29 +26,39 @@
             --input-text: #212529;
             --input-border: #ced4da;
             --input-placeholder: #6c757d;
-            --btn-success-bg: #28a745;
-            --btn-success-border: #28a745;
+            --btn-success-bg: #10b981;
+            --btn-success-border: #10b981;
             --btn-secondary-bg: #6c757d;
             --btn-secondary-border: #6c757d;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
             --transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-family: 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --accent-color: #3b82f6;
+            --accent-color-hover: #2563eb;
+            --success-color: #10b981;
+            --success-color-hover: #059669;
         }
 
         .dark-mode {
-            --bg-color: #0d1117; /* GitHub dark background */
-            --text-color: #c9d1d9; /* GitHub primary text */
-            --card-bg: #161b22; /* GitHub card/input background */
-            --card-border: #30363d; /* GitHub border */
-            --input-bg: #161b22;
-            --input-text: #c9d1d9;
-            --input-border: #30363d;
-            --input-placeholder: #8b949e; /* GitHub secondary text */
-            --btn-success-bg: #2ea043; /* GitHub green accent */
-            --btn-success-border: #2ea043;
-            --btn-secondary-bg: #21262d; /* GitHub secondary button */
-            --btn-secondary-border: #30363d;
-            --shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+            --bg-color: #111827;
+            --text-color: #e5e7eb;
+            --card-bg: #1f2937;
+            --card-border: #374151;
+            --input-bg: #1f2937;
+            --input-text: #e5e7eb;
+            --input-border: #374151;
+            --input-placeholder: #9ca3af;
+            --btn-success-bg: #10b981;
+            --btn-success-border: #10b981;
+            --btn-secondary-bg: #374151;
+            --btn-secondary-border: #4b5563;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            --accent-color: #3b82f6;
+            --accent-color-hover: #60a5fa;
+            --success-color: #10b981;
+            --success-color-hover: #34d399;
         }
 
         body {
@@ -59,52 +71,93 @@
         }
 
         .container {
-            max-width: 900px; /* Narrower container for modern look */
+            max-width: 900px;
+            padding: 0 1.5rem;
         }
 
-        h1 {
-            font-size: 2.5rem;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-text {
+            font-size: 2.2rem;
             font-weight: 700;
             color: var(--text-color);
-            transition: var(--transition);
+            position: relative;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin: 0;
+            padding-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
-        .dark-mode h1 {
-            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+        .page-subtitle {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .logo-text:after {
+            content: '';
+            position: absolute;
+            left: 10%;
+            bottom: 0;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .dark-mode .logo-text {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+            color: var(--accent-color);
         }
 
         .card {
             background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 0.75rem;
-            box-shadow: var(--shadow);
+            border: none;
+            border-radius: 1rem;
+            box-shadow: var(--card-shadow);
             transition: var(--transition), box-shadow 0.3s ease;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
             animation: fadeIn 0.5s ease-out;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow);
         }
 
-        .dark-mode .card:hover {
-            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+        .card-body {
+            padding: 1.75rem;
         }
 
         .form-label {
             color: var(--text-color);
             font-weight: 500;
             transition: var(--transition);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
         }
 
         .form-control {
             background-color: var(--input-bg);
             color: var(--input-text);
             border: 1px solid var(--input-border);
-            border-radius: 0.5rem;
-            padding: 0.75rem;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
             transition: var(--transition);
+            font-size: 1rem;
         }
 
         .form-control::placeholder {
@@ -115,105 +168,115 @@
         .form-control:focus {
             background-color: var(--input-bg);
             color: var(--input-text);
-            border-color: var(--btn-success-bg);
-            box-shadow: 0 0 0 0.25rem rgba(46, 160, 67, 0.3); /* Green focus ring */
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
             outline: none;
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, var(--btn-success-bg), #218838);
-            border: none;
-            color: #ffffff;
-            border-radius: 0.5rem;
+        .btn {
+            border-radius: 0.75rem;
             padding: 0.75rem 1.5rem;
             font-weight: 500;
             transition: var(--transition), transform 0.2s ease;
         }
 
+        .btn-success {
+            background: var(--success-color);
+            border: none;
+            color: #ffffff;
+        }
+
         .btn-success:hover {
-            background: linear-gradient(135deg, #218838, #1e7e34);
-            transform: translateY(-2px);
-        }
-
-        .dark-mode .btn-success {
-            background: linear-gradient(135deg, var(--btn-success-bg), #238636);
-        }
-
-        .dark-mode .btn-success:hover {
-            background: linear-gradient(135deg, #238636, #1e7e34);
+            background: var(--success-color-hover);
             transform: translateY(-2px);
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, var(--btn-secondary-bg), #5a6268);
-            border: none;
+            background-color: var(--btn-secondary-bg);
+            border-color: var(--btn-secondary-border);
             color: #ffffff;
-            border-radius: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            font-weight: 500;
-            transition: var(--transition), transform 0.2s ease;
         }
 
         .btn-secondary:hover {
-            background: linear-gradient(135deg, #5a6268, #4b5157);
-            transform: translateY(-2px);
-        }
-
-        .dark-mode .btn-secondary {
-            background: linear-gradient(135deg, var(--btn-secondary-bg), #30363d);
-        }
-
-        .dark-mode .btn-secondary:hover {
-            background: linear-gradient(135deg, #30363d, #21262d);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline-secondary {
-            border-radius: 0.5rem;
-            padding: 0.5rem 1rem;
-            color: var(--text-color);
-            border-color: var(--btn-secondary-border);
-            background-color: transparent;
-            transition: var(--transition), transform 0.2s ease;
-        }
-
-        .btn-outline-secondary:hover {
             background-color: var(--btn-secondary-bg);
-            color: var(--text-color);
+            opacity: 0.9;
             transform: translateY(-2px);
         }
 
         /* Dark mode toggle button */
+        .theme-toggle-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
         #darkModeToggle {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             padding: 0;
             background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
+            border: none;
+            box-shadow: var(--shadow);
             transition: var(--transition), transform 0.2s ease;
         }
 
         #darkModeToggle:hover {
             transform: scale(1.1);
-            background-color: var(--btn-secondary-bg);
+            background-color: var(--input-bg);
         }
 
         #darkModeToggle i {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             margin: 0;
+            color: var(--text-color);
+        }
+
+        /* Edit form styling */
+        .edit-card {
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
         /* Form validation */
         .form-control:invalid {
-            border-color: #f85149; /* GitHub red for consistency */
+            border-color: #ef4444;
         }
-
-        .dark-mode .form-control:invalid {
-            border-color: #f85149;
+        
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Header link */
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--text-color);
+            text-decoration: none;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .home-link:hover {
+            color: var(--accent-color);
+            transform: translateX(-5px);
+        }
+        
+        .home-link i {
+            margin-right: 0.5rem;
         }
 
         /* Animations */
@@ -221,30 +284,67 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 1.8rem;
+            }
+            
+            .card-body {
+                padding: 1.25rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.2rem;
+            }
+            
+            .form-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="theme-toggle-container">
+        <button id="darkModeToggle" class="btn" aria-label="สลับโหมดมืด">
+            <i id="darkModeIcon" class="bi bi-moon-stars-fill"></i>
+        </button>
+    </div>
+
     <div class="container">
-        <div class="d-flex justify-content-end mb-4">
-            <button id="darkModeToggle" class="btn btn-sm btn-outline-secondary" aria-label="สลับโหมดมืด">
-                <i id="darkModeIcon" class="bi bi-moon-stars-fill"></i>
-            </button>
+        <a href="/" class="home-link">
+            <i class="bi bi-arrow-left"></i> กลับไปหน้าหลัก
+        </a>
+        
+        <div class="logo-container">
+            <span class="logo-icon"><i class="bi bi-newspaper"></i></span>
+            <h1 class="logo-text">CurrentEdge</h1>
         </div>
-        <h1 class="mb-5 text-center">แก้ไขข่าว</h1>
-        <div class="card mb-5">
+        
+        <p class="page-subtitle mb-4">
+            <i class="bi bi-pencil-square"></i> แก้ไขข่าว
+        </p>
+        
+        <div class="card edit-card mb-5">
             <div class="card-body">
                 <form action="/edit/<%= id %>" method="POST">
-                    <div class="mb-4">
-                        <label for="title" class="form-label">หัวข้อ</label>
+                    <div class="form-group">
+                        <label for="title" class="form-label">หัวข้อข่าว</label>
                         <input type="text" name="title" class="form-control" id="title" value="<%= note.title %>" required />
                     </div>
-                    <div class="mb-4">
-                        <label for="content" class="form-label">รายละเอียด</label>
-                        <textarea name="content" class="form-control" id="content" rows="5" required><%= note.content %></textarea>
+                    <div class="form-group">
+                        <label for="content" class="form-label">เนื้อหาข่าว</label>
+                        <textarea name="content" class="form-control" id="content" rows="6" required><%= note.content %></textarea>
                     </div>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-success" type="submit"><i class="bi bi-check-circle me-2"></i>บันทึกการเปลี่ยนแปลง</button>
-                        <a href="/" class="btn btn-secondary">ยกเลิก</a>
+                    <div class="form-buttons">
+                        <button class="btn btn-success" type="submit">
+                            <i class="bi bi-check-circle"></i>บันทึกการเปลี่ยนแปลง
+                        </button>
+                        <a href="/" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i>ยกเลิก
+                        </a>
                     </div>
                 </form>
             </div>
@@ -253,17 +353,20 @@
 
     <script>
         const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
 
         function enableDarkMode() {
             document.documentElement.classList.add('dark-mode');
             localStorage.setItem('darkMode', 'enabled');
-            darkModeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+            darkModeIcon.classList.remove('bi-moon-stars-fill');
+            darkModeIcon.classList.add('bi-sun-fill');
         }
 
         function disableDarkMode() {
             document.documentElement.classList.remove('dark-mode');
             localStorage.setItem('darkMode', 'disabled');
-            darkModeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
+            darkModeIcon.classList.remove('bi-sun-fill');
+            darkModeIcon.classList.add('bi-moon-stars-fill');
         }
 
         // Initialize based on saved mode
