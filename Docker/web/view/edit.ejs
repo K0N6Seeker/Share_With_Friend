@@ -1,45 +1,47 @@
 <!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CurrentEdge - แก้ไขข่าว</title>
-    <!-- Early script to apply dark mode before CSS loads to prevent flicker -->
-    <script>
+<html lang="th"> <head>
+    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>CurrentEdge - แก้ไขข่าว</title> <script>
         (function() {
+            // ตรวจสอบว่ามีการตั้งค่า darkMode ใน localStorage หรือไม่
             if (localStorage.getItem('darkMode') === 'enabled') {
+                // ถ้ามี ให้เพิ่ม class 'dark-mode' เข้าไปที่ <html> element ทันที
                 document.documentElement.classList.add('dark-mode');
             }
         })();
     </script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
+        /* นำเข้า Google Font 'Prompt' */
         @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
 
+        /* กำหนด CSS Variables (ตัวแปร) สำหรับ Light Mode (Default) */
         :root {
-            --bg-color: #f8f9fa;
-            --text-color: #212529;
-            --card-bg: #ffffff;
-            --card-border: #dee2e6;
-            --input-bg: #ffffff;
-            --input-text: #212529;
-            --input-border: #ced4da;
-            --input-placeholder: #6c757d;
-            --btn-success-bg: #10b981;
-            --btn-success-border: #10b981;
-            --btn-secondary-bg: #6c757d;
-            --btn-secondary-border: #6c757d;
-            --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-            --transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-            --font-family: 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --accent-color: #3b82f6;
-            --accent-color-hover: #2563eb;
-            --success-color: #10b981;
-            --success-color-hover: #059669;
+            --bg-color: #f8f9fa; /* สีพื้นหลังหลัก */
+            --text-color: #212529; /* สีข้อความหลัก */
+            --card-bg: #ffffff; /* สีพื้นหลังการ์ด */
+            --card-border: #dee2e6; /* สีขอบการ์ด */
+            --input-bg: #ffffff; /* สีพื้นหลัง input */
+            --input-text: #212529; /* สีข้อความใน input */
+            --input-border: #ced4da; /* สีขอบ input */
+            --input-placeholder: #6c757d; /* สีข้อความ placeholder */
+            --btn-success-bg: #10b981; /* สีพื้นหลังปุ่ม Success */
+            --btn-success-border: #10b981; /* สีขอบปุ่ม Success */
+            --btn-secondary-bg: #6c757d; /* สีพื้นหลังปุ่ม Secondary */
+            --btn-secondary-border: #6c757d; /* สีขอบปุ่ม Secondary */
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* เงาทั่วไป */
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); /* เงาของการ์ด */
+            --transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; /* ค่า transition สำหรับ animation */
+            --font-family: 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Font ที่ใช้ */
+            --accent-color: #3b82f6; /* สีเน้น (Accent Color) */
+            --accent-color-hover: #2563eb; /* สีเน้นเมื่อ Hover */
+            --success-color: #10b981; /* สี Success */
+            --success-color-hover: #059669; /* สี Success เมื่อ Hover */
         }
 
+        /* กำหนด CSS Variables ใหม่เมื่อใช้ Dark Mode */
         .dark-mode {
             --bg-color: #111827;
             --text-color: #e5e7eb;
@@ -61,87 +63,98 @@
             --success-color-hover: #34d399;
         }
 
+        /* สไตล์ของ Body */
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-family);
-            padding-top: 3rem;
-            transition: var(--transition);
-            line-height: 1.6;
+            background-color: var(--bg-color); /* ใช้ตัวแปรสีพื้นหลัง */
+            color: var(--text-color); /* ใช้ตัวแปรสีข้อความ */
+            font-family: var(--font-family); /* ใช้ตัวแปร font */
+            padding-top: 3rem; /* เว้นระยะด้านบน */
+            transition: var(--transition); /* ใช้ค่า transition */
+            line-height: 1.6; /* ระยะห่างระหว่างบรรทัด */
         }
 
+        /* สไตล์ของ Container หลัก */
         .container {
-            max-width: 900px;
-            padding: 0 1.5rem;
+            max-width: 900px; /* ความกว้างสูงสุด */
+            padding: 0 1.5rem; /* ระยะห่างภายใน ซ้าย-ขวา */
         }
 
+        /* สไตล์ของส่วน Logo */
         .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
+            display: flex; /* จัดเรียงแนวนอน */
+            align-items: center; /* จัดกึ่งกลางแนวตั้ง */
+            justify-content: center; /* จัดกึ่งกลางแนวนอน */
+            margin-bottom: 2rem; /* ระยะห่างด้านล่าง */
         }
 
         .logo-text {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--text-color);
-            position: relative;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-            margin: 0;
-            padding-bottom: 8px;
-            letter-spacing: -0.5px;
+            font-size: 2.2rem; /* ขนาด font */
+            font-weight: 700; /* ความหนา font */
+            color: var(--text-color); /* สีข้อความ */
+            position: relative; /* สำหรับ :after */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* เงาข้อความ */
+            display: inline-block; /* ทำให้ :after ทำงานได้ */
+            margin: 0; /* ไม่มี margin */
+            padding-bottom: 8px; /* เว้นที่สำหรับเส้นใต้ */
+            letter-spacing: -0.5px; /* ระยะห่างตัวอักษร */
         }
 
+        /* สไตล์ของหัวข้อย่อยของหน้า */
         .page-subtitle {
-            color: var(--accent-color);
+            color: var(--accent-color); /* ใช้สีเน้น */
             font-size: 1.4rem;
             margin-top: 0.5rem;
             font-weight: 500;
-            text-align: center;
+            text-align: center; /* จัดกึ่งกลาง */
         }
 
+        /* สร้างเส้นใต้โลโก้ */
         .logo-text:after {
-            content: '';
-            position: absolute;
+            content: ''; /* จำเป็นสำหรับ pseudo-element */
+            position: absolute; /* ตำแหน่งสัมพัทธ์กับ .logo-text */
             left: 10%;
             bottom: 0;
             width: 80%;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent); /* ไล่สี */
         }
 
+        /* เงาข้อความโลโก้ใน Dark Mode */
         .dark-mode .logo-text {
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
+        /* ไอคอนข้างโลโก้ */
         .logo-icon {
             font-size: 2rem;
             margin-right: 0.5rem;
             color: var(--accent-color);
         }
 
+        /* สไตล์ของการ์ด */
         .card {
             background-color: var(--card-bg);
-            border: none;
-            border-radius: 1rem;
-            box-shadow: var(--card-shadow);
-            transition: var(--transition), box-shadow 0.3s ease;
+            border: none; /* ไม่มีเส้นขอบ */
+            border-radius: 1rem; /* ความโค้งมน */
+            box-shadow: var(--card-shadow); /* ใช้เงาของการ์ด */
+            transition: var(--transition), box-shadow 0.3s ease; /* animation */
             margin-bottom: 1.5rem;
-            overflow: hidden;
-            animation: fadeIn 0.5s ease-out;
+            overflow: hidden; /* ซ่อนส่วนที่เกินขอบ */
+            animation: fadeIn 0.5s ease-out; /* ใช้ animation fadeIn */
         }
 
+        /* เอฟเฟกต์เมื่อ Hover การ์ด */
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
+            transform: translateY(-5px); /* เลื่อนขึ้นเล็กน้อย */
+            box-shadow: var(--shadow); /* ใช้เงาทั่วไป */
         }
 
+        /* ระยะห่างภายในของการ์ด */
         .card-body {
             padding: 1.75rem;
         }
 
+        /* สไตล์ของ Label ในฟอร์ม */
         .form-label {
             color: var(--text-color);
             font-weight: 500;
@@ -150,6 +163,7 @@
             font-size: 1rem;
         }
 
+        /* สไตล์ของ Input field และ Textarea */
         .form-control {
             background-color: var(--input-bg);
             color: var(--input-text);
@@ -160,19 +174,22 @@
             font-size: 1rem;
         }
 
+        /* สไตล์ของ Placeholder */
         .form-control::placeholder {
             color: var(--input-placeholder);
             opacity: 0.7;
         }
 
+        /* สไตล์เมื่อ Input field ถูก Focus */
         .form-control:focus {
             background-color: var(--input-bg);
             color: var(--input-text);
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-            outline: none;
+            border-color: var(--accent-color); /* เปลี่ยนสีขอบเป็นสีเน้น */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* เพิ่มเงาเรืองแสง */
+            outline: none; /* เอา outline เริ่มต้นออก */
         }
 
+        /* สไตล์ของปุ่มทั่วไป */
         .btn {
             border-radius: 0.75rem;
             padding: 0.75rem 1.5rem;
@@ -180,44 +197,49 @@
             transition: var(--transition), transform 0.2s ease;
         }
 
+        /* สไตล์ของปุ่ม Success */
         .btn-success {
             background: var(--success-color);
             border: none;
             color: #ffffff;
         }
 
+        /* เอฟเฟกต์เมื่อ Hover ปุ่ม Success */
         .btn-success:hover {
             background: var(--success-color-hover);
-            transform: translateY(-2px);
+            transform: translateY(-2px); /* เลื่อนขึ้นเล็กน้อย */
         }
 
+        /* สไตล์ของปุ่ม Secondary */
         .btn-secondary {
             background-color: var(--btn-secondary-bg);
             border-color: var(--btn-secondary-border);
             color: #ffffff;
         }
 
+        /* เอฟเฟกต์เมื่อ Hover ปุ่ม Secondary */
         .btn-secondary:hover {
             background-color: var(--btn-secondary-bg);
-            opacity: 0.9;
-            transform: translateY(-2px);
+            opacity: 0.9; /* ลดความทึบเล็กน้อย */
+            transform: translateY(-2px); /* เลื่อนขึ้นเล็กน้อย */
         }
 
-        /* Dark mode toggle button */
+        /* ตำแหน่งของปุ่มสลับ Theme */
         .theme-toggle-container {
-            position: fixed;
+            position: fixed; /* ตำแหน่งคงที่บนหน้าจอ */
             top: 20px;
             right: 20px;
-            z-index: 1000;
+            z-index: 1000; /* อยู่เหนือ element อื่น */
         }
 
+        /* สไตล์ของปุ่มสลับ Theme */
         #darkModeToggle {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 48px;
             height: 48px;
-            border-radius: 50%;
+            border-radius: 50%; /* ทำให้เป็นวงกลม */
             padding: 0;
             background-color: var(--card-bg);
             border: none;
@@ -225,80 +247,88 @@
             transition: var(--transition), transform 0.2s ease;
         }
 
+        /* เอฟเฟกต์เมื่อ Hover ปุ่มสลับ Theme */
         #darkModeToggle:hover {
-            transform: scale(1.1);
+            transform: scale(1.1); /* ขยายขนาดเล็กน้อย */
             background-color: var(--input-bg);
         }
 
+        /* ไอคอนภายในปุ่มสลับ Theme */
         #darkModeToggle i {
             font-size: 1.4rem;
             margin: 0;
             color: var(--text-color);
         }
 
-        /* Edit form styling */
+        /* สไตล์พิเศษสำหรับการ์ดฟอร์มแก้ไข */
         .edit-card {
-            border-left: 4px solid var(--success-color);
+            border-left: 4px solid var(--success-color); /* เพิ่มแถบสีเขียวด้านซ้าย */
         }
-        
+
+        /* กลุ่มของฟอร์ม (Label + Input) */
         .form-group {
             margin-bottom: 1.5rem;
         }
 
-        /* Form validation */
+        /* สไตล์เมื่อ Input ไม่ผ่าน Validation (ถ้ามี) */
         .form-control:invalid {
-            border-color: #ef4444;
+            border-color: #ef4444; /* เปลี่ยนขอบเป็นสีแดง */
         }
-        
+
+        /* จัดกลุ่มปุ่มในฟอร์ม */
         .form-buttons {
-            display: flex;
-            gap: 1rem;
+            display: flex; /* จัดเรียงแนวนอน */
+            gap: 1rem; /* ระยะห่างระหว่างปุ่ม */
         }
-        
+
+        /* ไอคอนภายในปุ่ม */
         .btn i {
             margin-right: 0.5rem;
         }
-        
-        /* Header link */
+
+        /* สไตล์ของลิงก์กลับหน้าหลัก */
         .home-link {
             display: inline-flex;
             align-items: center;
             color: var(--text-color);
-            text-decoration: none;
+            text-decoration: none; /* ไม่มีขีดเส้นใต้ */
             margin-bottom: 1rem;
             font-weight: 500;
             transition: var(--transition);
         }
-        
+
+        /* เอฟเฟกต์เมื่อ Hover ลิงก์กลับหน้าหลัก */
         .home-link:hover {
             color: var(--accent-color);
-            transform: translateX(-5px);
+            transform: translateX(-5px); /* เลื่อนไปทางซ้ายเล็กน้อย */
         }
-        
+
+        /* ไอคอนในลิงก์กลับหน้าหลัก */
         .home-link i {
             margin-right: 0.5rem;
         }
 
-        /* Animations */
+        /* กำหนด Keyframes Animation ชื่อ fadeIn */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(10px); } /* เริ่มจากโปร่งใสและต่ำกว่าตำแหน่งจริง */
+            to { opacity: 1; transform: translateY(0); } /* สิ้นสุดที่ทึบและตำแหน่งจริง */
         }
-        
-        /* Responsive adjustments */
+
+        /* การปรับแต่งสำหรับหน้าจอขนาดเล็ก (Responsive) */
         @media (max-width: 576px) {
+            /* ลดขนาดโลโก้ */
             .logo-text {
                 font-size: 1.8rem;
             }
-            
+            /* ลด padding ในการ์ด */
             .card-body {
                 padding: 1.25rem;
             }
-            
+            /* ลด padding ในปุ่ม */
             .btn {
                 padding: 0.6rem 1.2rem;
             }
-            
+            /* เปลี่ยนการจัดเรียงปุ่มในฟอร์มเป็นแนวตั้ง */
             .form-buttons {
                 flex-direction: column;
                 gap: 0.5rem;
@@ -317,16 +347,13 @@
         <a href="/" class="home-link">
             <i class="bi bi-arrow-left"></i> กลับไปหน้าหลัก
         </a>
-        
+
         <div class="logo-container">
-            <span class="logo-icon"><i class="bi bi-newspaper"></i></span>
-            <h1 class="logo-text">CurrentEdge</h1>
-        </div>
-        
+            <span class="logo-icon"><i class="bi bi-newspaper"></i></span> <h1 class="logo-text">CurrentEdge</h1> </div>
+
         <p class="page-subtitle mb-4">
-            <i class="bi bi-pencil-square"></i> แก้ไขข่าว
-        </p>
-        
+            <i class="bi bi-pencil-square"></i> แก้ไขข่าว </p>
+
         <div class="card edit-card mb-5">
             <div class="card-body">
                 <form action="/edit/<%= id %>" method="POST">
@@ -352,34 +379,41 @@
     </div>
 
     <script>
+        // อ้างอิงไปยัง element ปุ่มสลับ theme และ ไอคอนภายในปุ่ม
         const darkModeToggle = document.getElementById('darkModeToggle');
         const darkModeIcon = document.getElementById('darkModeIcon');
 
+        // ฟังก์ชันสำหรับเปิดใช้งาน Dark Mode
         function enableDarkMode() {
-            document.documentElement.classList.add('dark-mode');
-            localStorage.setItem('darkMode', 'enabled');
-            darkModeIcon.classList.remove('bi-moon-stars-fill');
-            darkModeIcon.classList.add('bi-sun-fill');
+            document.documentElement.classList.add('dark-mode'); // เพิ่ม class 'dark-mode' ที่ <html>
+            localStorage.setItem('darkMode', 'enabled'); // บันทึกสถานะ 'enabled' ลงใน localStorage
+            darkModeIcon.classList.remove('bi-moon-stars-fill'); // เอาไอคอนพระจันทร์ออก
+            darkModeIcon.classList.add('bi-sun-fill'); // เพิ่มไอคอนพระอาทิตย์
         }
 
+        // ฟังก์ชันสำหรับปิดใช้งาน Dark Mode (กลับไป Light Mode)
         function disableDarkMode() {
-            document.documentElement.classList.remove('dark-mode');
-            localStorage.setItem('darkMode', 'disabled');
-            darkModeIcon.classList.remove('bi-sun-fill');
-            darkModeIcon.classList.add('bi-moon-stars-fill');
+            document.documentElement.classList.remove('dark-mode'); // เอา class 'dark-mode' ออกจาก <html>
+            localStorage.setItem('darkMode', 'disabled'); // บันทึกสถานะ 'disabled' ลงใน localStorage
+            darkModeIcon.classList.remove('bi-sun-fill'); // เอาไอคอนพระอาทิตย์ออก
+            darkModeIcon.classList.add('bi-moon-stars-fill'); // เพิ่มไอคอนพระจันทร์
         }
 
-        // Initialize based on saved mode
+        // ตรวจสอบสถานะที่บันทึกไว้ใน localStorage เมื่อโหลดหน้าเว็บเสร็จ
         if (localStorage.getItem('darkMode') === 'enabled') {
-            enableDarkMode();
+            enableDarkMode(); // ถ้าเคยเปิดไว้ ให้เปิด Dark Mode
         } else {
-            disableDarkMode();
+            disableDarkMode(); // ไม่งั้น ให้ใช้ Light Mode (ปิด Dark Mode)
         }
 
+        // เพิ่ม Event Listener ให้กับปุ่มสลับ Theme เมื่อมีการคลิก
         darkModeToggle.addEventListener('click', () => {
+            // ตรวจสอบว่าตอนนี้มี class 'dark-mode' หรือไม่
             if (document.documentElement.classList.contains('dark-mode')) {
+                // ถ้ามี (เป็น Dark Mode อยู่) ให้ปิด Dark Mode
                 disableDarkMode();
             } else {
+                // ถ้าไม่มี (เป็น Light Mode อยู่) ให้เปิด Dark Mode
                 enableDarkMode();
             }
         });

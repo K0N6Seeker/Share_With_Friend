@@ -1,61 +1,80 @@
 <!DOCTYPE html>
 <html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CurrentEdge - News Portal</title>
-    <!-- Early script to apply dark mode before CSS loads to prevent flicker -->
-    <script>
-        (function() {
+    <!-- ระบุว่าเอกสารเป็น HTML5 และใช้ภาษาไทย -->
+    <head>
+        <!-- ตั้งค่า charset เป็น UTF-8 เพื่อรองรับตัวอักษรไทย -->
+        <meta charset="UTF-8">
+        <!-- ตั้งค่า viewport เพื่อให้หน้าเว็บ responsive บนอุปกรณ์มือถือ -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- ตั้งชื่อหน้าเว็บเป็น "CurrentEdge - News Portal" -->
+        <title>CurrentEdge - News Portal</title>
+
+        <!-- สคริปต์เริ่มต้นเพื่อใช้โหมดมืดทันทีก่อนโหลด CSS เพื่อป้องกันการกระพริบ -->
+        <script>
+        (function () {
+            // ตรวจสอบว่า localStorage มีการตั้งค่าโหมดมืดเป็น 'enabled' หรือไม่
             if (localStorage.getItem('darkMode') === 'enabled') {
+                // ถ้ามี เพิ่มคลาส 'dark-mode' ให้กับ element ราก (html) เพื่อใช้ธีมมืด
                 document.documentElement.classList.add('dark-mode');
             }
         })();
     </script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
+
+        <!-- นำเข้า CSS ของ Bootstrap 5.3.0 จาก CDN เพื่อใช้สไตล์และคอมโพเนนต์ -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+        <!-- นำเข้าไอคอน Bootstrap Icons จาก CDN -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+            rel="stylesheet">
+
+        <!-- สไตล์ CSS ที่กำหนดเอง -->
+        <style>
+        /* นำเข้าฟอนต์ Kanit จาก Google Fonts เพื่อใช้ตัวอักษรภาษาไทยที่สวยงาม */
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
-        
+
+        /* กำหนดตัวแปร CSS สำหรับธีมสว่าง (light theme) */
         :root {
-            --bg-color: #f8f9fa;
-            --text-color: #212529;
-            --card-bg: #ffffff;
-            --card-border: #dee2e6;
-            --input-bg: #ffffff;
-            --input-text: #212529;
-            --input-border: #ced4da;
-            --input-placeholder: #6c757d;
-            --btn-primary-bg: #0d6efd;
-            --btn-primary-border: #0d6efd;
-            --btn-danger-bg: #dc3545;
-            --btn-danger-border: #dc3545;
-            --btn-secondary-bg: #6c757d;
-            --btn-secondary-border: #6c757d;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-            --font-family: 'Kanit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --accent-color: #4361ee;
-            --secondary-accent: #3a0ca3;
-            --card-hover: #f8f9fa;
-            --badge-bg: #e9ecef;
-            --badge-text: #495057;
+            --bg-color: #f8f9fa; /* สีพื้นหลังของหน้า */
+            --text-color: #212529; /* สีตัวอักษร */
+            --card-bg: #ffffff; /* สีพื้นหลังของการ์ด */
+            --card-border: #dee2e6; /* สีขอบการ์ด */
+            --input-bg: #ffffff; /* สีพื้นหลังของช่องกรอกข้อมูล */
+            --input-text: #212529; /* สีตัวอักษรในช่องกรอก */
+            --input-border: #ced4da; /* สีขอบช่องกรอก */
+            --input-placeholder: #6c757d; /* สีตัวอักษร placeholder */
+            --btn-primary-bg: #0d6efd; /* สีพื้นหลังปุ่มหลัก */
+            --btn-primary-border: #0d6efd; /* สีขอบปุ่มหลัก */
+            --btn-danger-bg: #dc3545; /* สีพื้นหลังปุ่มอันตราย */
+            --btn-danger-border: #dc3545; /* สีขอบปุ่มอันตราย */
+            --btn-secondary-bg: #6c757d; /* สีพื้นหลังปุ่มรอง */
+            --btn-secondary-border: #6c757d; /* สีขอบปุ่มรอง */
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* เงาของการ์ดและองค์ประกอบ */
+            --transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; /* การเปลี่ยนแปลงสไตล์แบบนุ่มนวล */
+            --font-family: 'Kanit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* ฟอนต์หลัก */
+            --accent-color: #4361ee; /* สีเน้นหลัก */
+            --secondary-accent: #3a0ca3; /* สีเน้นรอง */
+            --card-hover: #f8f9fa; /* สีพื้นหลังการ์ดเมื่อ hover */
+            --badge-bg: #e9ecef; /* สีพื้นหลังป้าย */
+            --badge-text: #495057; /* สีตัวอักษรป้าย */
         }
 
+        /* กำหนดตัวแปร CSS สำหรับธีมมืด (dark theme) */
         .dark-mode {
-            --bg-color: #0d1117; 
-            --text-color: #c9d1d9; 
-            --card-bg: #161b22; 
-            --card-border: #30363d; 
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --card-bg: #161b22;
+            --card-border: #30363d;
             --input-bg: #161b22;
             --input-text: #c9d1d9;
             --input-border: #30363d;
-            --input-placeholder: #8b949e; 
-            --btn-primary-bg: #4361ee; 
+            --input-placeholder: #8b949e;
+            --btn-primary-bg: #4361ee;
             --btn-primary-border: #4361ee;
-            --btn-danger-bg: #f85149; 
+            --btn-danger-bg: #f85149;
             --btn-danger-border: #f85149;
-            --btn-secondary-bg: #21262d; 
+            --btn-secondary-bg: #21262d;
             --btn-secondary-border: #30363d;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
             --accent-color: #4cc9f0;
@@ -65,34 +84,37 @@
             --badge-text: #8b949e;
         }
 
+        /* สไตล์พื้นฐานสำหรับ body */
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-family);
-            padding-top: 3rem;
-            transition: var(--transition);
-            line-height: 1.6;
-            min-height: 100vh;
-            position: relative;
-            padding-bottom: 3rem;
-            background-image: linear-gradient(to bottom, var(--bg-color), var(--bg-color) 85%, var(--card-bg));
-        }
-
+            background-color: var(--bg-color); /* ใช้สีพื้นหลังจากตัวแปร */
+            color: var(--text-color); /* ใช้สีตัวอักษรจากตัวแปร */
+            font-family: var(--font-family); /* ใช้ฟอนต์ Kanit */
+            padding-top: 3rem; /* เพิ่มระยะห่างด้านบน */
+            transition: var(--transition); /* การเปลี่ยนสีแบบนุ่มนวล */
+            line-height: 1.6; /* ความสูงของบรรทัด */
+            min-height: 100vh; /* ความสูงขั้นต่ำครอบคลุมหน้าจอ */
+            position: relative; /* สำหรับจัดตำแหน่งองค์ประกอบ */
+            padding-bottom: 3rem; /* ระยะห่างด้านล่าง */
+            background-image: linear-gradient(to bottom, var(--bg-color), var(--bg-color) 85%, var(--card-bg)); /* ไล่สีพื้นหลัง */
+/* จำกัดความกว้างสูงสุดของคอนเทนเนอร์ */
         .container {
             max-width: 900px;
         }
+    }
 
+        /* สไตล์สำหรับโลโก้ */
         .logo {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            transition: var(--transition);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            letter-spacing: -1px;
-            margin-bottom: 0.5rem;
-            display: inline-block;
+            font-size: 2.8rem; /* ขนาดตัวอักษรใหญ่ */
+            font-weight: 700; /* ตัวหนา */
+            color: var(--accent-color); /* สีเน้น */
+            transition: var(--transition); /* การเปลี่ยนสีแบบนุ่มนวล */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* เงาข้อความ */
+            letter-spacing: -1px; /* ระยะห่างตัวอักษร */
+            margin-bottom: 0.5rem; /* ระยะห่างด้านล่าง */
+            display: inline-block; /* แสดงเป็นบล็อกในบรรทัด */
         }
 
+        /* สไตล์สำหรับคำบรรยายโลโก้ (ไม่ได้ใช้ในโค้ดนี้) */
         .logo-subtitle {
             font-size: 1rem;
             color: var(--text-color);
@@ -101,10 +123,12 @@
             font-weight: 300;
         }
 
+        /* ปรับเงาโลโก้ในโหมดมืด */
         .dark-mode .logo {
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
+        /* สไตล์สำหรับหัวข้อการ์ด */
         h5.card-title {
             font-size: 1.25rem;
             font-weight: 600;
@@ -113,17 +137,20 @@
             margin-bottom: 0.75rem;
         }
 
+        /* สไตล์สำหรับการ์ด */
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 1rem;
-            box-shadow: var(--shadow);
-            transition: var(--transition), box-shadow 0.3s ease, transform 0.3s ease;
+            border-radius: 1rem; /* มุมโค้ง */
+            box-shadow: var(--shadow); /* เงา */
+            transition: var(--transition), box-shadow 0.3s ease, transform 0.3s ease; /* การเปลี่ยนแปลงเมื่อ hover */
             margin-bottom: 1.5rem;
             position: relative;
-            overflow: hidden;
+            overflow: hidden; /* ป้องกันเนื้อหาล้น */
+            animation: fadeIn 0.5s ease-out; /* อนิเมชันเมื่อการ์ดปรากฏ */
         }
 
+        /* เพิ่มแถบสีเน้นด้านซ้ายเมื่อ hover */
         .card::before {
             content: '';
             position: absolute;
@@ -131,25 +158,29 @@
             left: 0;
             width: 6px;
             height: 100%;
-            background: linear-gradient(to bottom, var(--accent-color), var(--secondary-accent));
-            opacity: 0;
+            background: linear-gradient(to bottom, var(--accent-color), var(--secondary-accent)); /* ไล่สี */
+            opacity: 0; /* มองไม่เห็นเริ่มต้น */
             transition: opacity 0.3s ease;
         }
 
+        /* สไตล์เมื่อ hover การ์ด */
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px); /* ยกการ์ดขึ้น */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* เงาเข้มขึ้น */
             background-color: var(--card-hover);
         }
 
+        /* แสดงแถบสีเมื่อ hover */
         .card:hover::before {
             opacity: 1;
         }
 
+        /* ปรับเงาการ์ดในโหมดมืดเมื่อ hover */
         .dark-mode .card:hover {
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
         }
 
+        /* สไตล์สำหรับช่องกรอกข้อมูล */
         .form-control {
             background-color: var(--input-bg);
             color: var(--input-text);
@@ -160,22 +191,25 @@
             font-size: 1rem;
         }
 
+        /* สไตล์สำหรับ placeholder */
         .form-control::placeholder {
             color: var(--input-placeholder);
             opacity: 0.7;
             font-weight: 300;
         }
 
+        /* สไตล์เมื่อช่องกรอกข้อมูลถูกเลือก */
         .form-control:focus {
             background-color: var(--input-bg);
             color: var(--input-text);
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+            border-color: var(--accent-color); /* ขอบสีเน้น */
+            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25); /* เงารอบช่อง */
             outline: none;
         }
 
+        /* สไตล์สำหรับปุ่มหลัก */
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-color), var(--secondary-accent));
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-accent)); /* ไล่สี */
             border: none;
             color: #ffffff;
             border-radius: 0.75rem;
@@ -184,56 +218,67 @@
             transition: var(--transition), transform 0.2s ease;
         }
 
+        /* สไตล์เมื่อ hover ปุ่มหลัก */
         .btn-primary:hover {
-            background: linear-gradient(135deg, var(--secondary-accent), var(--accent-color));
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+            background: linear-gradient(135deg, var(--secondary-accent), var(--accent-color)); /* ไล่สีสลับ */
+            transform: translateY(-2px); /* ยกปุ่มขึ้น */
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3); /* เงา */
         }
 
+        /* ปรับเงาปุ่มในโหมดมืด */
         .dark-mode .btn-primary:hover {
             box-shadow: 0 4px 10px rgba(76, 201, 240, 0.3);
         }
 
-        .btn-outline-secondary, .btn-outline-danger {
+        /* สไตล์สำหรับปุ่มรองและปุ่มอันตราย */
+        .btn-outline-secondary,
+        .btn-outline-danger {
             border-radius: 0.75rem;
             padding: 0.5rem 1rem;
             transition: var(--transition), transform 0.2s ease;
             font-weight: 400;
         }
 
+        /* สไตล์ปุ่มรอง */
         .btn-outline-secondary {
             color: var(--text-color);
             border-color: var(--btn-secondary-border);
             background-color: transparent;
         }
 
+        /* สไตล์เมื่อ hover ปุ่มรอง */
         .btn-outline-secondary:hover {
             background-color: var(--btn-secondary-bg);
             color: var(--text-color);
             transform: translateY(-2px);
         }
 
+        /* สไตล์ปุ่มอันตราย */
         .btn-outline-danger {
             color: var(--btn-danger-bg);
             border-color: var(--btn-danger-bg);
         }
 
+        /* สไตล์เมื่อ hover ปุ่มอันตราย */
         .btn-outline-danger:hover {
             background-color: var(--btn-danger-bg);
             color: #ffffff;
             transform: translateY(-2px);
         }
 
+        /* สไตล์สำหรับฟอร์มค้นหา */
         .search-form {
             margin-bottom: 2.5rem;
         }
 
+        /* สไตล์สำหรับกลุ่มช่องกรอกข้อมูล */
         .input-group {
             box-shadow: var(--shadow);
             border-radius: 0.75rem;
             overflow: hidden;
         }
 
+        /* สไตล์ปุ่มในกลุ่มช่องกรอก */
         .input-group .btn-outline-secondary {
             background-color: var(--card-bg);
             border-color: var(--input-border);
@@ -241,17 +286,20 @@
             border-left: none;
         }
 
+        /* สไตล์เมื่อ hover ปุ่มในกลุ่มช่องกรอก */
         .input-group .btn-outline-secondary:hover {
             background-color: var(--accent-color);
             border-color: var(--accent-color);
             color: white;
         }
 
+        /* สไตล์ช่องกรอกในกลุ่ม */
         .input-group .form-control {
             border-radius: 0.75rem 0 0 0.75rem;
             border-right: none;
         }
 
+        /* สไตล์สำหรับเนื้อหาโน้ต */
         .note-content {
             color: var(--text-color);
             opacity: 0.9;
@@ -260,14 +308,14 @@
             font-weight: 300;
         }
 
-        /* Dark mode toggle button */
+        /* สไตล์สำหรับปุ่มสลับโหมดมืด */
         #darkModeToggle {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 45px;
             height: 45px;
-            border-radius: 50%;
+            border-radius: 50%; /* วงกลม */
             padding: 0;
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -275,57 +323,80 @@
             box-shadow: var(--shadow);
         }
 
+        /* สไตล์เมื่อ hover ปุ่มสลับโหมดมืด */
         #darkModeToggle:hover {
-            transform: scale(1.1) rotate(15deg);
+            transform: scale(1.1) rotate(15deg); /* ขยายและหมุน */
             background-color: var(--card-hover);
         }
 
+        /* สไตล์ไอคอนในปุ่มสลับโหมดมืด */
         #darkModeToggle i {
             font-size: 1.2rem;
             margin: 0;
             color: var(--text-color);
         }
 
-        /* Animations for cards */
-        .card {
-            animation: fadeIn 0.5s ease-out;
-        }
-
+        /* อนิเมชันสำหรับการ์ด */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(15px); /* เริ่มจากด้านล่าง */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* อยู่ในตำแหน่งปกติ */
+            }
         }
 
-        /* Form validation */
+        /* สไตล์เมื่อฟอร์มไม่ถูกต้อง */
         .form-control:invalid {
-            border-color: var(--btn-danger-bg);
+            border-color: var(--btn-danger-bg); /* ขอบสีแดง */
         }
 
+        /* สไตล์เมื่อฟอร์มไม่ถูกต้องในโหมดมืด */
         .dark-mode .form-control:invalid {
             border-color: #f85149;
         }
 
-        /* Card action buttons */
+        /* สไตล์สำหรับกลุ่มปุ่มในแต่ละการ์ด */
         .card-actions {
             display: flex;
             gap: 0.5rem;
         }
 
+        /* สไตล์ปุ่มในกลุ่มการ์ด */
+        .card-actions .btn {
+            min-width: 120px;
+            text-align: center;
+            white-space: nowrap;
+            justify-content: center;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* กำหนดความกว้างปุ่มในกลุ่มการ์ด */
+        .card-actions .btn {
+            width: 140px;
+        }
+
+        /* สไตล์ปุ่มในกลุ่มปุ่ม */
         .btn-group .btn {
             border-radius: 0.75rem;
             margin-left: 0.25rem;
         }
 
+        /* สไตล์สำหรับส่วนหัว */
         .header-container {
             text-align: center;
             margin-bottom: 2rem;
         }
 
-        /* Add card styles */
+        /* สไตล์สำหรับการ์ดเพิ่มข่าว */
         .add-card {
-            border-top: 4px solid var(--accent-color);
+            border-top: 4px solid var(--accent-color); /* ขอบด้านบนสีเน้น */
         }
 
+        /* สไตล์หัวข้อการ์ดเพิ่มข่าว */
         .add-card .card-title {
             display: flex;
             align-items: center;
@@ -333,119 +404,171 @@
             color: var(--accent-color);
         }
 
+        /* สไตล์สำหรับข้อความนับตัวอักษร */
         .form-text#wordCount {
             font-size: 0.95rem;
             color: var(--accent-color);
             margin-top: 0.25rem;
         }
 
-        /* Mobile responsive */
+        /* สไตล์สำหรับกลุ่มปุ่มในฟอร์ม */
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* กำหนดขนาดปุ่มในกลุ่มฟอร์ม */
+        .form-buttons .btn {
+            min-width: 180px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* สไตล์ responsive สำหรับอุปกรณ์มือถือ */
         @media (max-width: 768px) {
             .btn-group {
-                flex-direction: column;
+                flex-direction: column; /* จัดปุ่มเป็นแนวตั้ง */
                 align-items: flex-start;
                 gap: 0.5rem;
             }
-            
+
             .btn-group .btn {
                 margin-left: 0;
-                width: 100%;
+                width: 100%; /* ปุ่มเต็มความกว้าง */
             }
-            
+
             .card-body {
-                flex-direction: column;
+                flex-direction: column; /* จัดเนื้อหาเป็นแนวตั้ง */
             }
-            
+
             .card-actions {
                 margin-top: 1rem;
                 width: 100%;
             }
 
             .logo {
-                font-size: 2.2rem;
+                font-size: 2.2rem; /* ลดขนาดโลโก้ */
             }
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="d-flex justify-content-end mb-4">
-            <button id="darkModeToggle" class="btn btn-sm" aria-label="สลับโหมดมืด">
-                <i id="darkModeIcon" class="bi bi-moon-stars-fill"></i>
-            </button>
-        </div>
+    </head>
 
-        <div class="header-container">
-            <h1 class="logo">CurrentEdge</h1>
-        </div>
-
-        <form class="input-group search-form" method="GET" action="/">
-            <input type="text" name="q" class="form-control" placeholder="ค้นหาด้วยหัวข้อข่าว..." value="<%= q %>">
-            <button class="btn btn-outline-secondary" type="submit">
-                <i class="bi bi-search"></i> ค้นหา
-            </button>
-        </form>
-
-        <div class="card mb-5 add-card">
-            <div class="card-body">
-                <h5 class="card-title mb-4"><i class="bi bi-plus-circle-fill"></i> เพิ่มข่าวใหม่</h5>
-                <form action="/add" method="POST">
-                    <div class="mb-3">
-                        <input name="title" class="form-control" placeholder="หัวข้อข่าว" required />
-                    </div>
-                    <div class="mb-4">
-                        <textarea name="content" id="newsContent" class="form-control" rows="4" placeholder="เนื้อหาข่าว" required></textarea>
-                        <div class="form-text text-end" id="wordCount">0 คำ</div>
-                    </div>
-                    <button class="btn btn-primary" type="submit"><i class="bi bi-plus-circle"></i> เพิ่มข่าว</button>
-                </form>
+    <body>
+        <!-- คอนเทนเนอร์หลักสำหรับเนื้อหา -->
+        <div class="container">
+            <!-- ปุ่มสลับโหมดมืดที่มุมขวาบน -->
+            <div class="d-flex justify-content-end mb-4">
+                <button id="darkModeToggle" class="btn btn-sm"
+                    aria-label="สลับโหมดมืด">
+                    <i id="darkModeIcon" class="bi bi-moon-stars-fill"></i>
+                </button>
             </div>
-        </div>
 
-        <% notes.forEach(function(n) { %>
+            <!-- ส่วนหัวที่มีโลโก้ -->
+            <div class="header-container">
+                <h1 class="logo">CurrentEdge</h1>
+            </div>
+
+            <!-- ฟอร์มค้นหาข่าว -->
+            <form class="input-group search-form" method="GET" action="/">
+                <!-- ช่องกรอกคำค้นหา -->
+                <input type="text" name="q" class="form-control"
+                    placeholder="ค้นหาด้วยหัวข้อข่าว..." value="<%= q %>">
+                <!-- ปุ่มค้นหา -->
+                <button class="btn btn-outline-secondary" type="submit">
+                    <i class="bi bi-search"></i> ค้นหา
+                </button>
+            </form>
+
+            <!-- การ์ดสำหรับเพิ่มข่าวใหม่ -->
+            <div class="card mb-5 add-card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4"><i
+                            class="bi bi-plus-circle-fill"></i>
+                        เพิ่มข่าวใหม่</h5>
+                    <!-- ฟอร์มสำหรับเพิ่มข่าว -->
+                    <form action="/add" method="POST">
+                        <div class="mb-3">
+                            <!-- ช่องกรอกหัวข้อข่าว -->
+                            <input name="title" class="form-control"
+                                placeholder="หัวข้อข่าว" required />
+                        </div>
+                        <div class="mb-4">
+                            <!-- ช่องกรอกเนื้อหาข่าว -->
+                            <textarea name="content" id="newsContent"
+                                class="form-control" rows="4"
+                                placeholder="เนื้อหาข่าว" required></textarea>
+                            <!-- แสดงจำนวนตัวอักษร -->
+                            <div class="form-text text-end" id="wordCount">0
+                                ตัวอักษร</div>
+                        </div>
+                        <!-- ปุ่มส่งฟอร์ม -->
+                        <button class="btn btn-primary" type="submit"><i
+                                class="bi bi-plus-circle"></i>
+                            เพิ่มข่าว</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- วนลูปแสดงการ์ดสำหรับแต่ละโน้ต -->
+            <% notes.forEach(function(n) { %>
             <div class="card mb-3">
-                <div class="card-body d-flex justify-content-between align-items-start">
+                <div
+                    class="card-body d-flex justify-content-between align-items-start">
                     <div>
+                        <!-- หัวข้อโน้ต -->
                         <h5 class="card-title"><%= n.title %></h5>
+                        <!-- เนื้อหาโน้ต -->
                         <p class="card-text note-content"><%= n.content %></p>
                     </div>
+                    <!-- กลุ่มปุ่มสำหรับแก้ไขและลบ -->
                     <div class="btn-group ms-3 card-actions">
-                        <a href="/edit/<%= n.id %>" class="btn btn-sm btn-outline-secondary">
+                        <!-- ลิงก์ไปยังหน้าแก้ไข -->
+                        <a href="/edit/<%= n.id %>"
+                            class="btn btn-sm btn-outline-secondary">
                             <i class="bi bi-pencil"></i> แก้ไข
                         </a>
-                        <form action="/delete/<%= n.id %>" method="POST" onsubmit="return confirm('ลบข่าวนี้?');">
-                            <button class="btn btn-sm btn-outline-danger" type="submit">
+                        <!-- ฟอร์มสำหรับลบโน้ต -->
+                        <form action="/delete/<%= n.id %>" method="POST"
+                            onsubmit="return confirm('ลบข่าวนี้?');">
+                            <button class="btn btn-sm btn-outline-danger"
+                                type="submit">
                                 <i class="bi bi-trash"></i> ลบ
                             </button>
                         </form>
                     </div>
                 </div>
             </div>
-        <% }) %>
-    </div>
+            <% }) %>
+        </div>
 
-    <script>
+        <!-- JavaScript สำหรับการโต้ตอบของหน้าเว็บ -->
+        <script>
+        // ดึง element ของปุ่มสลับโหมดมืด
         const darkModeToggle = document.getElementById('darkModeToggle');
 
+        // ฟังก์ชันเปิดโหมดมืด
         function enableDarkMode() {
-            document.documentElement.classList.add('dark-mode');
-            localStorage.setItem('darkMode', 'enabled');
-            darkModeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+            document.documentElement.classList.add('dark-mode'); // เพิ่มคลาสโหมดมืด
+            localStorage.setItem('darkMode', 'enabled'); // บันทึกสถานะใน localStorage
+            darkModeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>'; // เปลี่ยนไอคอนเป็นดวงอาทิตย์
         }
 
+        // ฟังก์ชันปิดโหมดมืด
         function disableDarkMode() {
-            document.documentElement.classList.remove('dark-mode');
-            localStorage.setItem('darkMode', 'disabled');
-            darkModeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
+            document.documentElement.classList.remove('dark-mode'); // ลบคลาสโหมดมืด
+            localStorage.setItem('darkMode', 'disabled'); // บันทึกสถานะใน localStorage
+            darkModeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>'; // เปลี่ยนไอคอนเป็นดวงจันทร์
         }
 
-        // Initialize based on saved mode
+        // เริ่มต้นโหมดตามค่าที่บันทึกไว้
         if (localStorage.getItem('darkMode') === 'enabled') {
             enableDarkMode();
         } else {
             disableDarkMode();
         }
 
+        // เพิ่มการจัดการคลิกสำหรับปุ่มสลับโหมดมืด
         darkModeToggle.addEventListener('click', () => {
             if (document.documentElement.classList.contains('dark-mode')) {
                 disableDarkMode();
@@ -454,28 +577,28 @@
             }
         });
 
-        // Add animations for cards when they come into view
+        // เพิ่มอนิเมชันให้การ์ดเมื่อหน้าโหลด
         document.addEventListener('DOMContentLoaded', () => {
             const cards = document.querySelectorAll('.card');
             cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animationDelay = `${index * 0.1}s`; // ตั้งหน่วงเวลาให้แต่ละการ์ด
             });
         });
 
-        // Word count for news content textarea
+        // นับจำนวนตัวอักษรในช่องเนื้อหาข่าว
         document.addEventListener('DOMContentLoaded', () => {
             const textarea = document.getElementById('newsContent');
             const wordCount = document.getElementById('wordCount');
             if (textarea && wordCount) {
                 const updateCount = () => {
-                    const text = textarea.value;
-                    const count = text.length;
-                    wordCount.textContent = `${count} ตัวอักษร`;
+                    const count = textarea.value.length; // นับจำนวนตัวอักษร
+                    wordCount.textContent = `${count} ตัวอักษร`; // อัปเดตข้อความ
                 };
-                textarea.addEventListener('input', updateCount);
-                updateCount();
+                textarea.addEventListener('input', updateCount); // อัปเดตเมื่อมีการพิมพ์
+                updateCount(); // อัปเดตครั้งแรก
             }
         });
     </script>
-</body>
+    </body>
+
 </html>
