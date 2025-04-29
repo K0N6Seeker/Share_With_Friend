@@ -1,12 +1,21 @@
+# กำหนดการตั้งค่าของบริการต่าง ๆ ภายใน Docker Compose
 services:
+  
+  # บริการ Redis
   redis:
+    # ใช้ image Redis เวอร์ชัน alpine (รุ่นที่เบาและเล็ก)
     image: redis:alpine
+    # กำหนดการ mapping port ของ container 6379 ไปยัง port 6379 บนเครื่อง host
     ports:
       - "6379:6379"
 
+  # บริการ web
   web:
+    # ใช้ Dockerfile ที่อยู่ใน directory ./web เพื่อสร้าง image
     build: ./web
+    # กำหนดการ mapping port ของ container 3000 ไปยัง port 3000 บนเครื่อง host
     ports:
       - "3000:3000"
+    # ระบุว่า web service ขึ้นอยู่กับ redis service
     depends_on:
       - redis
